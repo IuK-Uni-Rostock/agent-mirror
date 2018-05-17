@@ -79,7 +79,7 @@ flow_export *export_create_long_payload(flow_record *flow, uint8_t options, uint
 	* ---------------------------------
 	* | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
 	* ---------------------------------
-	* | U | U | U | U | V | V | G | E |
+	* | U | U | U | U | U | U | G | E |
 	*
 	* Bit 0     : is expired
 	* Bit 1     : is group address
@@ -171,7 +171,7 @@ void export_append_long_payload(flow_record *flow, flow_export *payload, uint8_t
 	* ---------------------------------
 	* | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
 	* ---------------------------------
-	* | U | U | U | U | V | V | G | E |
+	* | U | U | U | U | U | U | G | E |
 	*
 	* Bit 0     : is expired
 	* Bit 1     : is group address
@@ -282,7 +282,7 @@ flow_export *export_create_payload(flow_record *flow, uint8_t options, uint32_t 
 	* ---------------------------------
 	* | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
 	* ---------------------------------
-	* | U | U | U | U | V | V | G | E |
+	* | U | U | U | U | U | U | G | E |
 	*
 	* Bit 0     : is expired
 	* Bit 1     : is group address

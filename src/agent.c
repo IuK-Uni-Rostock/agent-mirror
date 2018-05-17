@@ -223,7 +223,7 @@ int main(int argc, char *argv[])
 			begin_monitoring();
 			break;
 		case T_USB:
-			if (kdrive_ap_open_usb(ap, atoi(input)) == KDRIVE_ERROR_NONE)
+			if (kdrive_ap_open_usb(ap, atoi(input)) != KDRIVE_ERROR_NONE)
 			{
 				kdrive_logger_ex(KDRIVE_LOGGER_FATAL, "Unable to open usb access port '%d'", atoi(input));
 				exit(EXIT_FAILURE);
@@ -231,7 +231,7 @@ int main(int argc, char *argv[])
 			begin_monitoring();
 			break;
 		case T_IP:
-			if (kdrive_ap_open_ip(ap, input) == KDRIVE_ERROR_NONE)
+			if (kdrive_ap_open_ip(ap, input) != KDRIVE_ERROR_NONE)
 			{
 				kdrive_logger_ex(KDRIVE_LOGGER_FATAL, "Unable to open ip access port '%d'", input);
 				exit(EXIT_FAILURE);
