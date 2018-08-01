@@ -7,7 +7,7 @@
 
 ## 2. Download agent source
 1. Switch to home directory `cd ~`
-2. Download agent `git clone https://git.informatik.uni-rostock.de/mj244/sindabus-agent.git`
+2. Download agent `git clone https://git.informatik.uni-rostock.de/iuk/security-projects/software/sindabus-agent.git`
 
 ## 3. Make KNX USB devices accessible for non-root users
 1. Add group KNX `sudo groupadd --system knx`
