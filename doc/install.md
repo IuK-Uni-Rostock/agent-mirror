@@ -7,22 +7,22 @@
 
 ## 2. Download agent source
 1. Switch to home directory `cd ~`
-2. Download agent `git clone https://git.informatik.uni-rostock.de/iuk/security-projects/software/sindabus-agent.git`
+2. Download agent `git clone https://git.informatik.uni-rostock.de/iuk/security-projects/software/building-automation/agent.git`
 
 ## 3. Make KNX USB devices accessible for non-root users
 1. Add group KNX `sudo groupadd --system knx`
 2. Add user to group `sudo gpasswd -a pi knx` (all users in group KNX will have access to KNX USB devices)
-3. Copy udev-rules `sudo cp sindabus-agent/lib/kdriveExpress-17.2.0-raspbian/90-knxusb.rules /etc/udev/rules.d/`
+3. Copy udev-rules `sudo cp agent/lib/kdriveExpress-17.2.0-raspbian/90-knxusb.rules /etc/udev/rules.d/`
 4. Reload udev rules or reboot `sudo reboot now`
 
 ## 4. Install dependencies
 1. Install dependencies `sudo apt install build-essential libsqlite3-dev`
 2. Switch to home directory `cd ~`
-3. Install kdriveExpress `sudo cp sindabus-agent/lib/kdriveExpress-17.2.0-raspbian/raspbian/libkdriveExpress.so /usr/local/lib/`
+3. Install kdriveExpress `sudo cp agent/lib/kdriveExpress-17.2.0-raspbian/raspbian/libkdriveExpress.so /usr/local/lib/`
 4. Reload shared libraries `sudo ldconfig`
 
 ## 5. Compile
-1. Switch directory `cd sindabus-agent/src`
+1. Switch directory `cd agent/src`
 2. Compile `make`
 
 ## 6. Install agent
