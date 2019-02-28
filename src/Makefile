@@ -15,7 +15,7 @@ telegram.o: telegram.c telegram.h
 utils.o: utils.c utils.h
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) $(LIBS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	$(RM) $(OBJECTS) $(TARGET)
