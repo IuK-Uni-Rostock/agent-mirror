@@ -5,8 +5,6 @@
 #include "list.h"
 #include "utils.h"
 #include "sqlite.h"
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,8 +74,6 @@ uint8_t export_options = 0xFF;
 
 
 // cmdline arguments
-bool demo = false;
-char *demo_fifo = "/tmp/demo_fifo";
 input_t input_type = 0;
 char *input;
 char *log_file;
@@ -94,7 +90,6 @@ void cmdlineargs(int argc, char *argv[])
 			{"log", required_argument, 0, 'l'},
 			{"input", required_argument, 0, 'i'},
 			{"type", required_argument, 0, 't'},
-			{"demo", no_argument, 0, 'd'},
 			{"version", no_argument, 0, 'v'},
 			{"help", no_argument, 0, 'h'},
 			{0, 0, 0, 0}
@@ -144,9 +139,6 @@ void cmdlineargs(int argc, char *argv[])
 						exit(EXIT_FAILURE);
 				}
 				break;
-			case 'd':
-				demo = true;
-				break;
 			case 'v':
 				printf("KNX Agent\nExport Protocol Version %u\n", EXPORT_VERSION);
 				exit(EXIT_SUCCESS);
@@ -159,27 +151,16 @@ void cmdlineargs(int argc, char *argv[])
 
 void init()
 {
-	// create fifo in demonstration mode
-	if (demo)
-	{
-		if (!mkfifo(demo_fifo, 0666))
-		{
-			kdrive_logger(KDRIVE_LOGGER_FATAL, "Unable to create fifo in demonstration mode");
-			exit(EXIT_FAILURE);
-		}
-	}
-
 	// configure logging level and output
 	kdrive_logger_set_level(KDRIVE_LOGGER_INFORMATION);
-	if (log_file != NULL || demo)
+	if (log_file != NULL)
 	{
-		if (log_file == NULL)
-			log_file = demo_fifo;
-
 		kdrive_logger_file_ex(log_file);
 	}
 	else
+	{
 		kdrive_logger_console();
+	}
 
 	// register error callback
 	kdrive_register_error_callback(&error_callback, NULL);
@@ -209,8 +190,6 @@ int main(int argc, char *argv[])
 	init();
 
 	kdrive_logger_ex(KDRIVE_LOGGER_INFORMATION, "Starting KNX Agent - Export Protocol Version %u", EXPORT_VERSION);
-	if (demo)
-		kdrive_logger(KDRIVE_LOGGER_INFORMATION, "Running in demonstration mode");
 
 	switch (input_type)
 	{
@@ -245,10 +224,6 @@ int main(int argc, char *argv[])
 
 	// release the access port
 	kdrive_ap_release(ap);
-
-	// remove fifo in demonstration mode
-	if (demo)
-		unlink(demo_fifo);
 
 	// dispose flow record list
 	list_dispose(&flow_record_list);
