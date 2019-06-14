@@ -15,7 +15,6 @@ void print_help(const char *name)
     puts("\t\t\t3 - replay file");
     puts("\n\t\t\tNote that input and input type must be passed together.");
     puts("\t\t\tIf none of them is passed to the program, the default serial device will be used.\n");
-    puts("--demo\t\t\tenable demonstration mode and write output to FIFO pipe at /tmp/demo_fifo\n");
     puts("--help\t\t\tprint this help list\n");
     puts("--version\t\tprint program version");
 }
